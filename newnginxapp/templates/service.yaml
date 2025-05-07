@@ -4,9 +4,6 @@ metadata:
   name: {{ include "newnginxapp.fullname" . }}
   labels:
     {{- include "newnginxapp.labels" . | nindent 4 }}
-  {{- if eq.Values.service.type "LoadBalancer"}}
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
   type: {{ .Values.service.type }}
   ports:
