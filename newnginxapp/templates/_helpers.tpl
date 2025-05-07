@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "newnginxapp.name" -}}
+{{- define "kiran-chart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "newnginxapp.fullname" -}}
+{{- define "kiran-chart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "newnginxapp.chart" -}}
+{{- define "kiran-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "newnginxapp.labels" -}}
-helm.sh/chart: {{ include "newnginxapp.chart" . }}
-{{ include "newnginxapp.selectorLabels" . }}
+{{- define "kiran-chart.labels" -}}
+helm.sh/chart: {{ include "kiran-chart.chart" . }}
+{{ include "kiran-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "newnginxapp.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "newnginxapp.name" . }}
+{{- define "kiran-chart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "kiran-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "newnginxapp.serviceAccountName" -}}
+{{- define "kiran-chart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "newnginxapp.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "kiran-chart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
